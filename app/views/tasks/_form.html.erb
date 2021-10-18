@@ -1,0 +1,17 @@
+<% @task.errors.any? %>
+  <ul>
+    <% @task.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+
+
+<%= form_with model: @task do |form| %>
+    <%= form.label :decription %><br/>
+    <%= form.text_field :description %><br/>
+    <%= form.label :date %><br />
+    <%= form.text_field :date %><br />
+    <%= form.label :category_id %><br />
+    <%= form.select :category_id, Category.all.map {|c| [c.description, c.id]} %><br />
+    <%= form.submit %>
+<% end %>
