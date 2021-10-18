@@ -17,6 +17,7 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
+    @task.user = User.find(1)
     if @task.save
       flash[:notice] = "task successfully added"
       redirect_to tasks_path
@@ -48,6 +49,6 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.require(:task).permit(:description, :date, :category_id)
+    params.require(:task).permit(:description, :date, :category_id, :user_id)
   end
 end
