@@ -1,6 +1,14 @@
 class TasksController < ApplicationController
   def index
-    @tasks= Task.all
+    @categories = Category.all
+
+    cate = params[:cate]
+
+    if !cate.nil?
+      @tasks = Task.where(:category_id => cate)
+    else
+        @tasks= Task.all
+    end
   end
 
   def new

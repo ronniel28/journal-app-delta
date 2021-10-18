@@ -6,3 +6,7 @@
 <% end %>
 
 <%= link_to 'Add task', new_task_path %>
+
+<% @categories.each do |category| %>
+  <%= link_to category.description, tasks_path(:cate => category.id) %>
+<% end %>
