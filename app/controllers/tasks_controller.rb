@@ -1,4 +1,6 @@
 class TasksController < ApplicationController
+  before_action :require_user
+  before_action :require_same_user
   def index
     @categories = Category.all
 

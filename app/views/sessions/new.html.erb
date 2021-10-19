@@ -1,0 +1,11 @@
+<h1>Log In</h1>
+
+<%= form_with scope: :session, url: login_path do |form| %>
+  <%= form.label :email %><br/>
+  <%= form.email_field :email %><br/>
+  <%= form.label :password %><br/>
+  <%= form.password_field :password %><br/>
+  <%= form.submit 'Log In' %>
+<% end %>
+
+<%= link_to 'Sign Up', signup_path %>
