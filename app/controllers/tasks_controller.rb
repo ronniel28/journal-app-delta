@@ -4,9 +4,7 @@ class TasksController < ApplicationController
   before_action :require_same_user, except: [:new, :create]
   def index
     @categories = Category.all
-
     cate = params[:cate]
-
     if !cate.nil?
       @tasks = Task.where(:category_id => cate)
     else

@@ -16,14 +16,14 @@ class UsersController < ApplicationController
   end
 
   def show
-   
+   @tasks = User.all
   end
 
   def edit
   
   end
 
-  def updat
+  def update
     if @user.update(user_params)
       flash[:notice] = "Profile Updated"
       redirect_to user_path(@user)
