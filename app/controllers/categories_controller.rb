@@ -1,4 +1,8 @@
 class CategoriesController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_same_user, except: [:new, :create]
+
   def index
     @categories = Category.all
   end
@@ -9,6 +13,7 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
+    @category.user = current_user
     if @category.save
      flash[:notice] = "Successfully Added"
      redirect_to category_path(@category)
@@ -18,15 +23,12 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.find(params[:id])
   end
 
   def edit
-    @category = Category.find(params[:id])
   end
 
   def update
-    @category = Category.find(params[:id])
     if @category.update(category_params)
       flash[:notice] = "successfully edited"
       redirect_to categories_path
@@ -36,10 +38,21 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    @category = Category.find(params[:id])
     @category.destroy
     flash[:notice] = "category deleted"
     redirect_to categories_path
+  end
+
+  def set_user
+    @category = Category.find(params[:id])
+  end
+
+  def require_same_user
+    if current_user != @category.user
+    flash[:notice] = "You can't perform the action"
+    redirect_to root_path
+    else
+    end
   end
 
   private
