@@ -16,7 +16,7 @@ class CategoriesController < ApplicationController
     @category.user = current_user
     if @category.save
      flash[:notice] = "Successfully Added"
-     redirect_to category_path(@category)
+     redirect_to root_path
     else
       render 'new'
     end

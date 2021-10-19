@@ -1,8 +1,2 @@
 <h1>Categories List </h1>
-<% @categories.each do |category| %>
-    <ul>
-      <li><%= category.description %>|<%= link_to 'Show', category_path(category) %>|<%= link_to 'Edit', edit_category_path(category) %>|<%= link_to 'Delete', category_path(category), method: :delete, data: {confirm: "delete category?"} %></li>
-    </ul>
-<% end %>
-
-<%= link_to 'Add New Category', new_category_path %>
+<%= render 'category', obj: @categories %>

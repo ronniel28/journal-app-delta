@@ -1,6 +1,8 @@
 <h1>Welcome <%= @user.username %></h1>
 <h2>start making task</h2>
 
+<%= render 'tasks/task', obj: @user.tasks %>
+<%= render 'categories/category', obj: @user.categories %>
 
 <%= link_to 'Edit Your Profile', edit_user_path(@user) %> | 
 <%= link_to 'Delete Your Profile', user_path(@user), method: :delete, data: { confirm: "Your Profile Will Be Deleted" } %>

@@ -3,13 +3,14 @@ class TasksController < ApplicationController
   before_action :require_user, only: [:edit, :update, :destroy]
   before_action :require_same_user, except: [:new, :create]
   def index
-    @categories = Category.all
-    cate = params[:cate]
-    if !cate.nil?
-      @tasks = Task.where(:category_id => cate)
-    else
-        @tasks= Task.all
-    end
+    # @categories = Category.all
+    # cate = params[:cate]
+    # if !cate.nil?
+    #   @tasks = Task.where(:category_id => cate)
+    # else
+    #     @tasks= Task.all
+    # end
+    @tasks = Task.all
   end
 
   def new
@@ -45,7 +46,7 @@ class TasksController < ApplicationController
     
     @task.destroy
     flash[:notice] = "Task Deleted"
-    redirect_to tasks_path
+    redirect_to root_path
   end
 
   def set_task
