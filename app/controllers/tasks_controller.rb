@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:edit, :update, :destroy]
   before_action :require_user, only: [:edit, :update, :destroy]
-  before_action :require_same_user, except: [:new, :create]
+  before_action :require_same_user, except: [:index, :new, :create]
   def index
     # @categories = Category.all
     # cate = params[:cate]
@@ -10,7 +10,7 @@ class TasksController < ApplicationController
     # else
     #     @tasks= Task.all
     # end
-    @tasks = Task.all
+    @tasks = Task.where(date: Date.today).where(user: current_user)
   end
 
   def new
@@ -36,7 +36,7 @@ class TasksController < ApplicationController
    
     if @task.update(task_params)
       flash[:notice] = "task successfully updated"
-      redirect_to tasks_path
+      redirect_to root_path
     else
       render 'edit'
     end
