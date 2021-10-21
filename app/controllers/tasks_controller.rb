@@ -3,13 +3,6 @@ class TasksController < ApplicationController
   before_action :require_user, only: [:edit, :update, :destroy]
   before_action :require_same_user, except: [:index, :new, :create]
   def index
-    # @categories = Category.all
-    # cate = params[:cate]
-    # if !cate.nil?
-    #   @tasks = Task.where(:category_id => cate)
-    # else
-    #     @tasks= Task.all
-    # end
     @tasks = Task.where(date: Date.today).where(user: current_user)
   end
 

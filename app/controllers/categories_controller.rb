@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
   before_action :require_same_user, except: [:index, :new, :create]
 
   def index
-    @categories = Category.all
+    @categories = Category.where(user: current_user)
   end
 
   def new
@@ -40,7 +40,7 @@ class CategoriesController < ApplicationController
   def destroy
     @category.destroy
     flash[:notice] = "category deleted"
-    redirect_to categories_path
+    redirect_to root_path
   end
 
   def set_user
