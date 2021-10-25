@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_category, only: [:show, :edit, :update, :destroy]
   before_action :require_user, only: [:show, :edit, :update, :destroy]
   before_action :require_same_user, except: [:index, :new, :create]
 
@@ -43,7 +43,7 @@ class CategoriesController < ApplicationController
     redirect_to root_path
   end
 
-  def set_user
+  def set_category
     @category = Category.find(params[:id])
   end
 
